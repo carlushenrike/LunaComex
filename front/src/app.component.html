@@ -1,0 +1,28 @@
+<div class="flex h-screen w-full bg-slate-100 overflow-hidden">
+  <app-sidebar></app-sidebar>
+
+  <div class="flex-1 h-full overflow-hidden">
+    @switch (app.currentPage()) {
+      @case ('dashboard') { <app-dashboard /> }
+      @case ('duimp') { <app-duimp-wizard /> }
+      @case ('catalog') { <app-product-catalog /> }
+      @case ('lpco') { <app-lpco-list /> }
+      @case ('tracking') { <app-tracking /> }
+      @case ('numerario') { <app-numerario /> }
+      @case ('financial') { <app-financial /> }
+      @case ('internal-finance') { <app-internal-finance /> }
+      @case ('invoice') { <app-invoice-mirror /> }
+      @case ('closing') { <app-process-closing /> }
+      
+      @default {
+        <div class="flex flex-col items-center justify-center h-full text-slate-400">
+           <div class="w-20 h-20 bg-slate-200 rounded-full flex items-center justify-center mb-4">
+             <app-icon name="layers" [size]="40"></app-icon>
+           </div>
+           <h2 class="text-2xl font-bold text-slate-600 capitalize">{{ app.currentPage() }}</h2>
+           <p>Módulo em desenvolvimento.</p>
+         </div>
+      }
+    }
+  </div>
+</div>

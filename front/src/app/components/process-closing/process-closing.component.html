@@ -1,0 +1,50 @@
+<div class="flex flex-col items-center justify-center h-full bg-slate-50 p-6">
+   <div class="bg-white p-8 rounded-xl shadow-lg border border-slate-200 max-w-lg w-full">
+      <div class="text-center mb-8">
+         <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
+            <app-icon name="archive" [size]="32"></app-icon>
+         </div>
+         <h2 class="text-2xl font-bold text-slate-800">Fechamento do Processo</h2>
+         <p class="text-slate-500">Checklist para arquivamento definitivo</p>
+      </div>
+
+      <div class="space-y-4 mb-8">
+         <div class="flex items-center gap-4 p-4 rounded-lg bg-emerald-50 border border-emerald-100">
+            <div class="text-emerald-600"><app-icon name="check-circle" [size]="24"></app-icon></div>
+            <div>
+               <h4 class="font-bold text-emerald-900">Desembaraço Aduaneiro</h4>
+               <p class="text-xs text-emerald-700">DUIMP Verde/Desembaraçada</p>
+            </div>
+         </div>
+
+         <div class="flex items-center gap-4 p-4 rounded-lg bg-emerald-50 border border-emerald-100">
+            <div class="text-emerald-600"><app-icon name="check-circle" [size]="24"></app-icon></div>
+            <div>
+               <h4 class="font-bold text-emerald-900">Entrega da Carga</h4>
+               <p class="text-xs text-emerald-700">Evento CCT: Entrega Realizada</p>
+            </div>
+         </div>
+
+         <div class="flex items-center gap-4 p-4 rounded-lg bg-emerald-50 border border-emerald-100">
+            <div class="text-emerald-600"><app-icon name="check-circle" [size]="24"></app-icon></div>
+            <div>
+               <h4 class="font-bold text-emerald-900">Financeiro Zerado</h4>
+               <p class="text-xs text-emerald-700">PCCE sem pendências</p>
+            </div>
+         </div>
+
+         <div class="flex items-center gap-4 p-4 rounded-lg bg-slate-50 border border-slate-200 opacity-60">
+            <div class="text-slate-400"><app-icon name="clock" [size]="24"></app-icon></div>
+            <div>
+               <h4 class="font-bold text-slate-600">Nota Fiscal Emitida</h4>
+               <p class="text-xs text-slate-500">Pendente de Geração XML</p>
+            </div>
+         </div>
+      </div>
+
+      <button disabled class="w-full py-3 bg-slate-200 text-slate-400 font-bold rounded-lg cursor-not-allowed flex justify-center items-center gap-2">
+         <app-icon name="lock" [size]="18"></app-icon> Arquivar Processo
+      </button>
+      <p class="text-xs text-center text-slate-400 mt-2">Complete todos os itens para habilitar o arquivamento.</p>
+   </div>
+</div>

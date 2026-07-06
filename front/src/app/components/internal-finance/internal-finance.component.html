@@ -1,0 +1,107 @@
+<div class="p-6 md:p-8 h-full bg-slate-50 overflow-y-auto">
+  <div class="flex justify-between items-center mb-6">
+     <div>
+        <h2 class="text-2xl font-bold text-slate-800">Financeiro Interno</h2>
+        <p class="text-slate-500">Gestão e Aprovação de Solicitações do Despachante</p>
+     </div>
+     <div class="flex gap-2">
+        <span class="px-3 py-1 bg-white border border-slate-300 rounded text-sm text-slate-600 font-medium shadow-sm">
+           Saldo Disponível: <span class="text-emerald-600 font-bold">R$ 150.000,00</span>
+        </span>
+     </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+     <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-yellow-400">
+        <h3 class="text-sm font-bold text-slate-500 uppercase mb-2">Solicitações Pendentes</h3>
+        <p class="text-3xl font-bold text-slate-800">{{ pendingCount() }}</p>
+     </div>
+     <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-emerald-500">
+        <h3 class="text-sm font-bold text-slate-500 uppercase mb-2">Total Aprovado (Hoje)</h3>
+        <p class="text-3xl font-bold text-emerald-600">R$ {{ totalApproved() | number:'1.2-2' }}</p>
+     </div>
+  </div>
+
+  <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden mb-8">
+     <div class="bg-yellow-50 px-6 py-3 border-b border-yellow-100 flex items-center gap-2">
+        <app-icon name="alert-circle" [size]="18" class="text-yellow-600"></app-icon>
+        <h3 class="text-sm font-bold text-yellow-800 uppercase">Solicitações Aguardando Aprovação</h3>
+     </div>
+     
+     <table class="w-full text-left">
+        <thead class="bg-white border-b border-slate-100">
+           <tr>
+              <th class="py-3 px-6 text-xs font-bold text-slate-500 uppercase">Processo / DUIMP</th>
+              <th class="py-3 px-6 text-xs font-bold text-slate-500 uppercase">Descrição da Despesa</th>
+              <th class="py-3 px-6 text-xs font-bold text-slate-500 uppercase text-right">Valor</th>
+              <th class="py-3 px-6 text-xs font-bold text-slate-500 uppercase text-center">Ações</th>
+           </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+           @for (item of pendingExpenses(); track item.id) {
+              <tr class="hover:bg-slate-50">
+                 <td class="py-4 px-6">
+                    <p class="text-sm font-bold text-slate-700">{{ store.financialProcess().ref }}</p>
+                    <p class="text-xs text-slate-500 font-mono">{{ store.financialProcess().duimp }}</p>
+                 </td>
+                 <td class="py-4 px-6 text-sm text-slate-700">{{ item.description }}</td>
+                 <td class="py-4 px-6 text-right text-sm font-bold text-slate-800">R$ {{ item.value | number:'1.2-2' }}</td>
+                 <td class="py-4 px-6 flex justify-center gap-2">
+                    <button 
+                       (click)="approve(item.id)" 
+                       class="flex items-center gap-1 px-3 py-1.5 bg-emerald-600 text-white rounded hover:bg-emerald-700 shadow-sm transition-colors text-xs font-bold"
+                       title="Aprovar e Pagar"
+                    >
+                       <app-icon name="check-square" [size]="14"></app-icon> BAIXAR
+                    </button>
+                    <button 
+                       class="flex items-center gap-1 px-3 py-1.5 bg-red-100 text-red-600 rounded hover:bg-red-200 transition-colors text-xs font-bold"
+                       title="Rejeitar"
+                    >
+                       <app-icon name="x-circle" [size]="14"></app-icon> REJEITAR
+                    </button>
+                 </td>
+              </tr>
+           } @empty {
+              <tr>
+                 <td colspan="4" class="py-8 text-center text-slate-400">
+                    <div class="flex flex-col items-center">
+                       <app-icon name="check-circle" [size]="32" class="text-slate-300 mb-2"></app-icon>
+                       <span class="text-sm">Nenhuma solicitação pendente no momento.</span>
+                    </div>
+                 </td>
+              </tr>
+           }
+        </tbody>
+     </table>
+  </div>
+
+  <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+     <div class="bg-slate-50 px-6 py-3 border-b border-slate-200 flex items-center gap-2">
+        <app-icon name="clock" [size]="18" class="text-slate-500"></app-icon>
+        <h3 class="text-sm font-bold text-slate-700 uppercase">Histórico de Baixas</h3>
+     </div>
+     <table class="w-full text-left">
+        <thead class="bg-white border-b border-slate-100">
+           <tr>
+              <th class="py-3 px-6 text-xs font-bold text-slate-500 uppercase">Processo</th>
+              <th class="py-3 px-6 text-xs font-bold text-slate-500 uppercase">Descrição</th>
+              <th class="py-3 px-6 text-xs font-bold text-slate-500 uppercase text-right">Valor</th>
+              <th class="py-3 px-6 text-xs font-bold text-slate-500 uppercase text-center">Status</th>
+           </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+           @for (item of paidExpenses(); track item.id) {
+              <tr class="hover:bg-slate-50 opacity-75">
+                 <td class="py-3 px-6 text-sm text-slate-600">{{ store.financialProcess().ref }}</td>
+                 <td class="py-3 px-6 text-sm text-slate-600">{{ item.description }}</td>
+                 <td class="py-3 px-6 text-right text-sm text-slate-600">R$ {{ item.value | number:'1.2-2' }}</td>
+                 <td class="py-3 px-6 text-center">
+                    <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">PAGO</span>
+                 </td>
+              </tr>
+           }
+        </tbody>
+     </table>
+  </div>
+</div>

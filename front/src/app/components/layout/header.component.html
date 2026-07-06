@@ -1,0 +1,37 @@
+<header class="bg-white border-b border-slate-200 px-6 py-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+  <div class="flex items-center gap-4">
+    <button class="md:hidden text-slate-500">
+       <app-icon name="list"></app-icon>
+     </button>
+
+    <div>
+      <h2 class="text-xl font-bold text-slate-800 flex items-center gap-3">
+         Nova DUIMP
+        <span 
+          class="px-2 py-0.5 rounded-full text-xs font-medium border"
+          [class.bg-yellow-50]="store.status() === 'Rascunho'"
+          [class.text-yellow-700]="store.status() === 'Rascunho'"
+          [class.border-yellow-200]="store.status() === 'Rascunho'"
+        >
+          {{ store.status() }}
+        </span>
+      </h2>
+      <p class="text-xs text-slate-400">ID: TMP-{{ date | date:'yyyyMMdd' }}-001</p>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap gap-2">
+    <button class="flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 rounded-md text-slate-700 hover:bg-slate-50 text-sm font-medium transition-colors shadow-sm">
+       <app-icon name="save" [size]="16"></app-icon>
+       Salvar Rascunho
+    </button>
+    <button class="flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 rounded-md text-slate-700 hover:bg-slate-50 text-sm font-medium transition-colors shadow-sm">
+       <app-icon name="check-circle" [size]="16"></app-icon>
+       Validar
+    </button>
+    <button class="flex items-center gap-2 px-4 py-2 bg-blue-600 border border-transparent rounded-md text-white hover:bg-blue-700 text-sm font-medium transition-colors shadow-sm">
+       <app-icon name="send" [size]="16"></app-icon>
+       Transmitir
+    </button>
+  </div>
+</header>

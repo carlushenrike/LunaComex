@@ -1,0 +1,50 @@
+<div class="p-6 md:p-8 h-full flex flex-col bg-slate-50">
+  <div class="flex justify-between items-center mb-6">
+     <h2 class="text-2xl font-bold text-slate-800">Licenças, Permissões e Certificados (LPCO)</h2>
+     <button class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 shadow-sm flex items-center gap-2">
+        <app-icon name="plus" [size]="18"></app-icon> Novo Pedido
+     </button>
+  </div>
+
+  <div class="bg-white rounded-lg border border-slate-200 shadow-sm flex-1 overflow-hidden">
+    <table class="w-full text-left">
+       <thead class="bg-slate-50 border-b border-slate-200">
+          <tr>
+             <th class="py-3 px-6 text-xs font-semibold text-slate-500 uppercase">Número</th>
+             <th class="py-3 px-6 text-xs font-semibold text-slate-500 uppercase">Órgão</th>
+             <th class="py-3 px-6 text-xs font-semibold text-slate-500 uppercase">Modelo</th>
+             <th class="py-3 px-6 text-xs font-semibold text-slate-500 uppercase">Vigência</th>
+             <th class="py-3 px-6 text-xs font-semibold text-slate-500 uppercase text-center">Situação</th>
+             <th class="py-3 px-6 text-xs font-semibold text-slate-500 uppercase text-right">Saldo</th>
+          </tr>
+       </thead>
+       <tbody class="divide-y divide-slate-100">
+          @for (item of store.lpcoList(); track item.numero) {
+             <tr class="hover:bg-slate-50 transition-colors">
+                <td class="py-4 px-6 font-mono text-sm text-blue-600 font-medium">{{ item.numero }}</td>
+                <td class="py-4 px-6 text-sm text-slate-700 font-bold">{{ item.orgao }}</td>
+                <td class="py-4 px-6 text-sm text-slate-600">{{ item.modelo }}</td>
+                <td class="py-4 px-6 text-sm text-slate-600">{{ item.dataFimVigencia | date:'dd/MM/yyyy' }}</td>
+                <td class="py-4 px-6 text-center">
+                   <span 
+                     class="px-2 py-1 rounded-full text-xs font-bold border"
+                     [class.bg-emerald-50]="item.situacao === 'DEFERIDO'"
+                     [class.text-emerald-700]="item.situacao === 'DEFERIDO'"
+                     [class.border-emerald-200]="item.situacao === 'DEFERIDO'"
+                     [class.bg-yellow-50]="item.situacao === 'EM EXIGENCIA'"
+                     [class.text-yellow-700]="item.situacao === 'EM EXIGENCIA'"
+                     [class.border-yellow-200]="item.situacao === 'EM EXIGENCIA'"
+                     [class.bg-blue-50]="item.situacao === 'PARA ANALISE'"
+                     [class.text-blue-700]="item.situacao === 'PARA ANALISE'"
+                     [class.border-blue-200]="item.situacao === 'PARA ANALISE'"
+                   >
+                     {{ item.situacao }}
+                   </span>
+                </td>
+                <td class="py-4 px-6 text-right text-sm text-slate-600 font-mono">{{ item.saldo || '-' }}</td>
+             </tr>
+          }
+       </tbody>
+    </table>
+  </div>
+</div>

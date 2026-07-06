@@ -1,0 +1,31 @@
+# --- GERAL ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- NODE JS (Backend) ---
+portal-unico-api/node_modules/
+portal-unico-api/.env
+portal-unico-api/logs/
+portal-unico-api/*.pfx
+portal-unico-api/*.pem
+portal-unico-api/*.key
+
+# --- ANGULAR (Frontend) ---
+front/node_modules/
+front/.angular/
+front/dist/
+front/.editorconfig
+
+# global
+*.pfx
+*.PFX
+*.pem
+*.PEM
+*.key
+*.KEY
+*.cer
+*.CER
+*.env
+portal-unico-api/src/data/

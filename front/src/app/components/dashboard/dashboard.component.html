@@ -1,0 +1,43 @@
+<div class="p-6 md:p-8 space-y-8 bg-slate-50 h-full overflow-y-auto">
+  <h2 class="text-2xl font-bold text-slate-800">Visão Geral (Cockpit)</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+       <div class="flex items-center gap-3 mb-4">
+          <div class="p-2 bg-blue-100 text-blue-600 rounded-lg"><app-icon name="pie-chart" [size]="24"></app-icon></div>
+          <h3 class="font-bold text-slate-700">Status DUIMP</h3>
+       </div>
+       <div class="space-y-3">
+          @for (stat of store.dashboardStats().duimpStatus; track stat.label) {
+            <div class="flex justify-between items-center p-2 hover:bg-slate-50 rounded">
+               <span class="text-sm font-medium text-slate-600">{{ stat.label }}</span>
+               <span class="text-lg font-bold" [class]="stat.color">{{ stat.count }}</span>
+            </div>
+          }
+       </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+       <div class="flex items-center gap-3 mb-4">
+          <div class="p-2 bg-yellow-100 text-yellow-600 rounded-lg"><app-icon name="alert-triangle" [size]="24"></app-icon></div>
+          <h3 class="font-bold text-slate-700">Alertas LPCO</h3>
+       </div>
+       <div class="text-center py-4">
+          <div class="text-4xl font-bold text-yellow-600 mb-2">{{ store.dashboardStats().lpcoAlerts }}</div>
+          <p class="text-sm text-slate-500">Licenças em Exigência ou Vencendo</p>
+          <button class="mt-4 text-blue-600 text-sm font-medium hover:underline">Ver Pendências</button>
+       </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+       <div class="flex items-center gap-3 mb-4">
+          <div class="p-2 bg-emerald-100 text-emerald-600 rounded-lg"><app-icon name="anchor" [size]="24"></app-icon></div>
+          <h3 class="font-bold text-slate-700">Cargas no Porto</h3>
+       </div>
+       <div class="text-center py-4">
+          <div class="text-4xl font-bold text-emerald-600 mb-2">{{ store.dashboardStats().cargasZonaPrimaria }}</div>
+          <p class="text-sm text-slate-500">Aguardando Desembaraço (Ponto Zero)</p>
+       </div>
+    </div>
+  </div>
+</div>

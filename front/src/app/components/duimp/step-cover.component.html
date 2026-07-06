@@ -1,0 +1,73 @@
+<div class="space-y-6">
+  <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+    <h3 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
+      Importador
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class="block text-sm font-medium text-slate-600 mb-1">CNPJ / Nome</label>
+        <input 
+          type="text" 
+          [value]="store.coverData().importerCnpj + ' - ' + store.coverData().importerName" 
+          disabled
+          class="w-full bg-slate-100 border border-slate-300 rounded-md px-3 py-2 text-slate-500 cursor-not-allowed"
+        >
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-slate-600 mb-1">Tipo de Importador <span class="text-red-500">*</span></label>
+        <select 
+          [ngModel]="store.coverData().importerType"
+          (ngModelChange)="updateField('importerType', $event)"
+          class="w-full bg-white border border-slate-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+        >
+          <option value="juridica">Pessoa Jurídica</option>
+          <option value="fisica">Pessoa Física</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+    <h3 class="text-lg font-semibold text-slate-800 mb-4">Caracterização da Operação</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class="block text-sm font-medium text-slate-600 mb-1">Tipo de Declaração <span class="text-red-500">*</span></label>
+        <select 
+          [ngModel]="store.coverData().declarationType"
+          (ngModelChange)="updateField('declarationType', $event)"
+          class="w-full bg-white border border-slate-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+        >
+          <option value="consumo">Importação para Consumo</option>
+          <option value="admissao">Admissão Temporária</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-slate-600 mb-1">Situação da Declaração <span class="text-red-500">*</span></label>
+        <select 
+          [ngModel]="store.coverData().situation"
+          (ngModelChange)="updateField('situation', $event)"
+          class="w-full bg-white border border-slate-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+        >
+          <option value="normal">Normal</option>
+          <option value="especial">Situação Especial</option>
+        </select>
+      </div>
+      
+      @if (store.coverData().situation === 'especial') {
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-slate-600 mb-1">Motivo da Situação Especial <span class="text-red-500">*</span></label>
+          <select 
+            [ngModel]="store.coverData().specialReason"
+            (ngModelChange)="updateField('specialReason', $event)"
+            class="w-full bg-white border border-slate-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+          >
+            <option value="">Selecione um motivo...</option>
+            <option value="calamidade">Calamidade Pública</option>
+            <option value="guerra">Estado de Guerra</option>
+            <option value="epidemia">Epidemia / Pandemia</option>
+          </select>
+        </div>
+      }
+    </div>
+  </div>
+</div>

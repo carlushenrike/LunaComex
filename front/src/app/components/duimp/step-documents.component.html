@@ -1,0 +1,106 @@
+<div class="space-y-6">
+  <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+    <h3 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
+      <app-icon name="globe" class="text-slate-400" [size]="20"></app-icon>
+      Exportador Padrão (Fornecedor)
+    </h3>
+    <div>
+      <label class="block text-sm font-medium text-slate-600 mb-1">Nome do Exportador / Fabricante <span class="text-red-500">*</span></label>
+      <input 
+        type="text" 
+        [ngModel]="store.docData().defaultExporter"
+        (ngModelChange)="updateField('defaultExporter', $event)"
+        class="w-full bg-white border border-slate-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+        placeholder="Ex: TIN-TIN ELECTRONICS LTD"
+      />
+      <p class="text-xs text-slate-500 mt-1">Este nome será utilizado automaticamente para preencher os itens na próxima etapa.</p>
+    </div>
+  </div>
+
+  <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+    <h3 class="text-lg font-semibold text-slate-800 mb-4">Moeda e Negociação</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <label class="block text-sm font-medium text-slate-600 mb-1">Moeda Negociada <span class="text-red-500">*</span></label>
+        <select 
+          [ngModel]="store.docData().currency"
+          (ngModelChange)="updateField('currency', $event)"
+          class="w-full bg-white border border-slate-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+        >
+          <option value="USD">USD - Dólar Americano</option>
+          <option value="EUR">EUR - Euro</option>
+          <option value="BRL">BRL - Real Brasileiro</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-slate-600 mb-1">INCOTERM <span class="text-red-500">*</span></label>
+        <select 
+          [ngModel]="store.docData().incoterm"
+          (ngModelChange)="updateField('incoterm', $event)"
+          class="w-full bg-white border border-slate-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+        >
+          <option value="">Selecione...</option>
+          <option value="FOB">FOB - Free on Board</option>
+          <option value="CIF">CIF - Cost, Insurance and Freight</option>
+          <option value="EXW">EXW - Ex Works</option>
+          <option value="FCA">FCA - Free Carrier</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-slate-600 mb-1">Total Mercadoria (Estimado)</label>
+        <div class="bg-slate-100 border border-slate-200 rounded-md px-3 py-2 text-slate-600 font-medium text-right">
+          {{ store.totalItemsValue() | number:'1.2-2' }} {{ store.docData().currency }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+    <h3 class="text-lg font-semibold text-slate-800 mb-4">Componentes do Valor Aduaneiro</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class="block text-sm font-medium text-slate-600 mb-1">Valor do Frete ({{ store.docData().currency }})</label>
+        <input 
+          type="number" 
+          [ngModel]="store.docData().freightValue"
+          (ngModelChange)="updateField('freightValue', $event)"
+          class="w-full bg-white border border-slate-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-right"
+          placeholder="0.00"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-slate-600 mb-1">Valor do Seguro ({{ store.docData().currency }})</label>
+        <input 
+          type="number" 
+          [ngModel]="store.docData().insuranceValue"
+          (ngModelChange)="updateField('insuranceValue', $event)"
+          class="w-full bg-white border border-slate-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none text-right"
+          placeholder="0.00"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+    <h3 class="text-lg font-semibold text-slate-800 mb-4">Referências</h3>
+    <div>
+      <label class="block text-sm font-medium text-slate-600 mb-1">RUC (Reference Unique Code) <span class="text-red-500">*</span></label>
+      <div class="flex gap-2">
+        <input 
+          type="text" 
+          [ngModel]="store.docData().ruc"
+          (ngModelChange)="updateField('ruc', $event)"
+          class="flex-1 bg-white border border-slate-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none uppercase font-mono"
+          placeholder="EX: 1BR12345678909"
+        />
+        <button 
+          (click)="store.generateRuc()"
+          class="px-4 py-2 bg-slate-100 text-slate-700 rounded-md border border-slate-300 hover:bg-slate-200 font-medium transition-colors"
+        >
+          Gerar RUC
+        </button>
+      </div>
+      <p class="text-xs text-slate-500 mt-2">O número RUC é obrigatório para identificação da carga em sistemas internacionais.</p>
+    </div>
+  </div>
+</div>

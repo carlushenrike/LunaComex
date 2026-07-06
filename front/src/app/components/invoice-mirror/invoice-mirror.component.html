@@ -1,0 +1,73 @@
+<div class="p-6 md:p-8 bg-slate-50 h-full overflow-y-auto">
+   <h2 class="text-2xl font-bold text-slate-800 mb-6">Espelho da Nota Fiscal (Entrada)</h2>
+
+   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-1 space-y-6">
+         <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+            <h3 class="font-bold text-slate-700 mb-4">Parâmetros de Geração</h3>
+            <div class="space-y-4">
+               <div>
+                  <label class="block text-sm font-medium text-slate-600 mb-1">DUIMP de Origem</label>
+                  <input value="24/00500-1" disabled class="w-full bg-slate-100 border border-slate-300 rounded px-3 py-2 text-slate-500 font-mono">
+               </div>
+               <div>
+                  <label class="block text-sm font-medium text-slate-600 mb-1">CFOP Sugerido</label>
+                  <select class="w-full bg-white border border-slate-300 rounded px-3 py-2">
+                     <option value="3102">3.102 - Compra para Comercialização</option>
+                     <option value="3101">3.101 - Compra para Industrialização</option>
+                  </select>
+               </div>
+               <button class="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 font-medium shadow-sm">
+                  Recalcular Valores
+               </button>
+            </div>
+         </div>
+      </div>
+
+      <div class="lg:col-span-2">
+         <div class="bg-white p-8 rounded-lg shadow-sm border border-slate-200">
+            <div class="flex justify-between items-start border-b border-slate-100 pb-4 mb-4">
+               <div>
+                  <h3 class="text-lg font-bold text-slate-800">Prévia da NF-e</h3>
+                  <p class="text-sm text-slate-500">Fornecedor: TIN-TIN ELECTRONICS LTD</p>
+               </div>
+               <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-bold">RASCUNHO</span>
+            </div>
+
+            <div class="space-y-4 text-sm">
+               <div class="flex justify-between py-2 border-b border-slate-50">
+                  <span class="text-slate-600">Total Produtos:</span>
+                  <span class="font-medium">R$ 55.400,00</span>
+               </div>
+               <div class="flex justify-between py-2 border-b border-slate-50">
+                  <span class="text-slate-600">Total II:</span>
+                  <span class="font-medium">R$ 8.200,00</span>
+               </div>
+               <div class="flex justify-between py-2 border-b border-slate-50">
+                  <span class="text-slate-600">Total IPI:</span>
+                  <span class="font-medium">R$ 5.540,00</span>
+               </div>
+               <div class="flex justify-between py-2 border-b border-slate-50">
+                  <span class="text-slate-600">Total PIS/COFINS:</span>
+                  <span class="font-medium">R$ 4.200,00</span>
+               </div>
+               <div class="flex justify-between py-2 border-b border-slate-50">
+                  <span class="text-slate-600">Outras Despesas (Siscomex):</span>
+                  <span class="font-medium">R$ 214,50</span>
+               </div>
+               <div class="flex justify-between pt-4">
+                  <span class="text-lg font-bold text-slate-800">Valor Total da Nota:</span>
+                  <span class="text-lg font-bold text-blue-600">R$ 73.554,50</span>
+               </div>
+            </div>
+
+            <div class="mt-8 flex justify-end gap-3">
+               <button class="px-6 py-2 border border-slate-300 text-slate-700 rounded hover:bg-slate-50">Ver Itens</button>
+               <button class="px-6 py-2 bg-emerald-600 text-white rounded hover:bg-emerald-700 shadow-sm flex items-center gap-2">
+                  <app-icon name="file-text" [size]="18"></app-icon> Gerar XML
+               </button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

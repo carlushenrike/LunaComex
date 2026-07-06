@@ -1,0 +1,114 @@
+<div class="space-y-6">
+  <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+    <h3 class="text-lg font-semibold text-slate-800 mb-4">Dados da Carga</h3>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div>
+        <label class="block text-sm font-medium text-slate-600 mb-1">URF de Entrada <span class="text-red-500">*</span></label>
+        <div class="relative">
+          <input 
+            type="text" 
+            [ngModel]="store.cargoData().urfEntry"
+            (ngModelChange)="updateField('urfEntry', $event)"
+            class="w-full bg-white border border-slate-300 rounded-md pl-3 pr-10 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+            placeholder="Ex: 0817600"
+          />
+          <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
+            <app-icon name="search" [size]="16"></app-icon>
+          </div>
+        </div>
+        <p class="text-xs text-slate-500 mt-1">PORTO DE SANTOS</p>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-slate-600 mb-1">URF de Despacho <span class="text-red-500">*</span></label>
+        <div class="relative">
+          <input 
+            type="text" 
+            [ngModel]="store.cargoData().urfDispatch"
+            (ngModelChange)="updateField('urfDispatch', $event)"
+            class="w-full bg-white border border-slate-300 rounded-md pl-3 pr-10 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+          />
+          <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
+            <app-icon name="search" [size]="16"></app-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-sm font-medium text-slate-600 mb-3">Via de Transporte</label>
+      <div class="flex flex-wrap gap-4">
+        <button 
+          (click)="updateField('transportMode', 'maritima')"
+          [class]="'flex flex-col items-center justify-center p-4 border rounded-lg w-32 transition-colors ' + 
+            (store.cargoData().transportMode === 'maritima' ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-slate-200 hover:border-slate-300 text-slate-600')"
+        >
+          <app-icon name="ship" [size]="24" class="mb-2"></app-icon>
+          <span class="text-sm font-medium">Marítima</span>
+        </button>
+        <button 
+          (click)="updateField('transportMode', 'aerea')"
+          [class]="'flex flex-col items-center justify-center p-4 border rounded-lg w-32 transition-colors ' + 
+            (store.cargoData().transportMode === 'aerea' ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-slate-200 hover:border-slate-300 text-slate-600')"
+        >
+          <app-icon name="plane" [size]="24" class="mb-2"></app-icon>
+          <span class="text-sm font-medium">Aérea</span>
+        </button>
+        <button 
+          (click)="updateField('transportMode', 'rodoviaria')"
+          [class]="'flex flex-col items-center justify-center p-4 border rounded-lg w-32 transition-colors ' + 
+            (store.cargoData().transportMode === 'rodoviaria' ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-slate-200 hover:border-slate-300 text-slate-600')"
+        >
+          <app-icon name="truck" [size]="24" class="mb-2"></app-icon>
+          <span class="text-sm font-medium">Rodoviária</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+    <h3 class="text-lg font-semibold text-slate-800 mb-4">Documentação e Veículo</h3>
+    
+    <div class="mb-6 p-4 bg-blue-50 border border-blue-100 rounded-md">
+       <label class="block text-sm font-bold text-blue-900 mb-1">
+         Número do Documento de Transporte ({{ docLabel() }}) <span class="text-red-500">*</span>
+       </label>
+       <input 
+         type="text" 
+         [ngModel]="store.cargoData().transportDocNumber"
+         (ngModelChange)="updateField('transportDocNumber', $event)"
+         class="w-full bg-white border border-blue-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none font-mono text-blue-900"
+         [placeholder]="docPlaceholder()"
+       />
+       <p class="text-xs text-blue-600 mt-1">Este número é essencial para a vinculação da carga no sistema CCT da Receita Federal.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class="block text-sm font-medium text-slate-600 mb-1">
+          @if (store.cargoData().transportMode === 'maritima') { Nome do Navio }
+          @else if (store.cargoData().transportMode === 'aerea') { Número do Voo }
+          @else { Placa do Veículo }
+        </label>
+        <input 
+          type="text" 
+          [ngModel]="store.cargoData().vehicleId"
+          (ngModelChange)="updateField('vehicleId', $event)"
+          class="w-full bg-white border border-slate-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+          placeholder="Ex: MAERSK LIMA"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-slate-600 mb-1">Data da Chegada</label>
+        <div class="relative">
+          <input 
+            type="date" 
+            [ngModel]="store.cargoData().arrivalDate"
+            (ngModelChange)="updateField('arrivalDate', $event)"
+            class="w-full bg-white border border-slate-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
